@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  valor_total_reais: 9.99
+  quantidade_faturas: 1
+  dia_vencimento_faturas: 1
+  nome_curso: MyString
+  aluno: one
+  instituicao_ensino: one
+
+two:
+  valor_total_reais: 9.99
+  quantidade_faturas: 1
+  dia_vencimento_faturas: 1
+  nome_curso: MyString
+  aluno: two
+  instituicao_ensino: two
