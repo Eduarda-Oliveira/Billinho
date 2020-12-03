@@ -2,12 +2,12 @@
 
 one:
   valor_fatura_reais: 9.99
-  data_vencimento: 2020-11-30
+  data_vencimento: 2020-12-03
   status: MyString
   matricula: one
 
 two:
   valor_fatura_reais: 9.99
-  data_vencimento: 2020-11-30
+  data_vencimento: 2020-12-03
   status: MyString
   matricula: two

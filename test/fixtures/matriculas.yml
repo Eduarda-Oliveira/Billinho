@@ -6,7 +6,7 @@ one:
   dia_vencimento_faturas: 1
   nome_curso: MyString
   aluno: one
-  instituicao_ensino: one
+  instituicao: one
 
 two:
   valor_total_reais: 9.99
@@ -14,4 +14,4 @@ two:
   dia_vencimento_faturas: 1
   nome_curso: MyString
   aluno: two
-  instituicao_ensino: two
+  instituicao: two

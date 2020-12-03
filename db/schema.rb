@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_30_212151) do
+ActiveRecord::Schema.define(version: 2020_12_03_190632) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2020_11_30_212151) do
     t.index ["matricula_id"], name: "index_faturas_on_matricula_id"
   end
 
-  create_table "instituicao_ensinos", force: :cascade do |t|
+  create_table "instituicaos", force: :cascade do |t|
     t.string "nome"
     t.string "cnpj"
     t.string "tipo"
@@ -50,14 +50,14 @@ ActiveRecord::Schema.define(version: 2020_11_30_212151) do
     t.integer "dia_vencimento_faturas"
     t.string "nome_curso"
     t.bigint "aluno_id"
-    t.bigint "instituicao_ensino_id"
+    t.bigint "instituicao_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["aluno_id"], name: "index_matriculas_on_aluno_id"
-    t.index ["instituicao_ensino_id"], name: "index_matriculas_on_instituicao_ensino_id"
+    t.index ["instituicao_id"], name: "index_matriculas_on_instituicao_id"
   end
 
   add_foreign_key "faturas", "matriculas"
   add_foreign_key "matriculas", "alunos"
-  add_foreign_key "matriculas", "instituicao_ensinos"
+  add_foreign_key "matriculas", "instituicaos"
 end

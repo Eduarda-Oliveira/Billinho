@@ -6,7 +6,7 @@ class CreateMatriculas < ActiveRecord::Migration[5.2]
       t.integer :dia_vencimento_faturas
       t.string :nome_curso
       t.references :aluno, foreign_key: true
-      t.references :instituicao_ensino, foreign_key: true
+      t.references :instituicao, foreign_key: true
 
       t.timestamps
     end

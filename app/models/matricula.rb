@@ -4,21 +4,5 @@ class Matricula < ApplicationRecord
   validates :dia_vencimento_faturas, presence: true, numericality: { greater_than: 0, less_than: 32}
   validates :nome_curso, presence: true
   belongs_to :aluno
-  belongs_to :instituicao_ensino
-  def valorFatura(valor_total_reais, quantidade_faturas)
-    return valor_total_reais / quantidade_faturas
-  end
-
-  def faturas
-    self.fatura
-  end
-
-#  def verificaFatura(fatura.valor_fatura_reais, valor_total_reais, quantidade_faturas)
- #   return((fatura.valor_fatura_reais * quantidade_faturas) == valor_total_reais)
-    
- # end
-
-  #def 
-  #  Matricula.faturas.cont
-
+  belongs_to :instituicao
 end

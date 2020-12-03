@@ -3,7 +3,7 @@
 one:
   nome: MyString
   cpf: MyString
-  data_nascimento: 2020-11-30
+  data_nascimento: 2020-12-03
   telefone_celular: 1
   genero: MyString
   meio_pagamento_fatura: MyString
@@ -11,7 +11,7 @@ one:
 two:
   nome: MyString
   cpf: MyString
-  data_nascimento: 2020-11-30
+  data_nascimento: 2020-12-03
   telefone_celular: 1
   genero: MyString
   meio_pagamento_fatura: MyString
