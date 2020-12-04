@@ -4,3 +4,4 @@ class Aluno < ApplicationRecord
     validates :genero, presence: true, inclusion: { in: %w(F M) }
     validates :meio_pagamento_fatura, presence: true, inclusion: { in: %w(Boleto Cartão) }
 end
+ 

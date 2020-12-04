@@ -11,6 +11,20 @@ module Api
                 aluno = Aluno.find(params[:id])
                 render json: {status: 'SUCCESS', message:'Aluno carregado', data:aluno}, status: :ok
             end
-		end
+            # Criar um novo aluno
+            def create 
+                aluno = Aluno.new(aluno_params)
+                if aluno.save
+                    render json: {status: 'SUCCESS', message:'Saved aluno', data:aluno}, status: :ok
+                else
+                    render json: {status: 'ERROR', message:'Aluno not saved', data:aluno.erros}, status: :unprocessable_entity
+                end
+            end 
+            # parametros aceitos
+            private
+            def aluno_params
+                params.permit(:nome, :cpf, :data_nascimento, :telefone_celular, :genero, :meio_pagamento_fatura)  
+            end 
+        end
 	end
 end 

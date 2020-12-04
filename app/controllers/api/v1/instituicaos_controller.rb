@@ -11,6 +11,20 @@ module Api
                 instituicao = Instituicao.find(params[:id])
                 render json: {status: 'SUCCESS', message:'Instituição carregada', data:Instituicao}, status: :ok
             end
+             # Criar uma nova instituição
+             def create 
+                instituicao = Instituicao.new(instituicao_params)
+                if instituicao.save
+                    render json: {status: 'SUCCESS', message:'Saved instituicao', data:instituicao}, status: :ok
+                else
+                    render json: {status: 'ERROR', message:'Instituicao not saved', data:instituicao.erros}, status: :unprocessable_entity
+                end
+            end 
+            # parametros aceitos
+            private
+            def instituicao_params
+                params.permit(:nome, :cnpj, :tipo)  
+            end 
 		end
 	end
 end
