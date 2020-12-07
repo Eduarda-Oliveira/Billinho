@@ -22,6 +22,7 @@
         instituicao: instituicao,
         aluno: aluno
     })
+
     fatura.times do
         Fatura.create({
             valor_fatura_reais: valorMatricula/ fatura,
