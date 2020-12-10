@@ -1,42 +1,41 @@
 class CriaFatura < ApplicationController
+    #indica as variaveis utilizadas, ele é para o acesso
+    attr_accessor :matricula, :dia_vencimento, :valor, :quantidade, :fatura
+
+    #prepara os atricutos da classe
     def initialize(params={})
-        @matricula = Matricula.find(params[:dia_vencimento_faturas, :valor_total_reais, :quantidade_faturas, matricula_id]
-        @fatura = Fatura.find(params[:data_vencimento, :valor_fatura_reais, :status]
+        @matricula = params[:matricula]
+        @dia_vencimento = params[:dia_vencimento_faturas]
+        @valor = params[:valorFatura]
+        @quantidade = params[:quantidade_faturas]
     end
 
-    def CreateFatura
-        statusDefault
+    def perform
         criaData
-        valor
-        matricula
     end
 
     def statusDefault
-        status = 'Aberta'
+        'Aberta'
     end
 
-    require 'date'
-    data = Date.today
-    dia = data.mday
+    def validaData
+        data = Date.today
+        dia = data.mday
+        return dia_vencimento <= dia
+    end 
+
     def mesInicio 
-        if dia_vencimento_faturas <= dia
-            dia = dia_vencimento_faturas
+        if validaData
+            dia = dia_vencimento
             data = data << -1
         else
-            dia = dia_vencimento_faturas
+            dia = dia_vencimento
         end
+        mes = data.mon
+        ano = data.year
     end
-    mes = data.mon
-    ano = data.year
-    def criaData
+
+    def criaInicio
         data_vencimento = Date.new(ano, mes, dia)
-    end
-
-    def valor(valor_total_reais, quantidade_faturas)#funciona
-        valor_fatura_reais = valor_total_reais/ quantidade_faturas 
-    end      
-
-    def matricula
-        matricula_id = matricula_id
-    end
+    end  
 end

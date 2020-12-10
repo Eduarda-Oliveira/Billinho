@@ -12,8 +12,12 @@ module Api
                 render json: {status: 'SUCCESS', message:'Fatura carregada', data:fatura}, status: :ok
             end
             def create
-               fatura = criaFatura(params[:dia_vencimento_faturas, :valor_fatura_reais, :data_vencimento, :status, :matricula_id, :valor_total_reais, :quantidade_faturas]).createFatura
-                data = data << -1
+                fatura = Fatura.new(fatura_params)
+                if fatura.save
+                    render json: {status: 'SUCCESS', message:'Saved fatura', data:fatura}, status: :ok
+                else
+                    render json: {status: 'ERROR', message:'Fatura not saved', data:fatura.errors}, status: :unprocessable_entity
+                end
             end
             private
             def fatura_params

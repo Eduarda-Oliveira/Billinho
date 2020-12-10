@@ -1,6 +1,7 @@
 module Api
 	module V1
         class Api::V1::MatriculasController < ApplicationController   
+            include criaFatura
             # Listar todas as matriculas
             def index
                 matriculas = Matricula.order('created_at DESC');
@@ -25,14 +26,15 @@ module Api
             def matricula_params
                 params.permit(:valor_total_reais, :quantidade_faturas, :dia_vencimento_faturas, :nome_curso, :aluno_id, :instituicao_id) 
             end
+            
+            def valorFatura
+                valor_total_reais/ quantidade_faturas 
+            end    
              
-             
-            #quantidade_faturas.times do
-               def after_create 
-                criaFatura(:dia_vencimento_faturas, :valor_fatura_reais, :data_vencimento, :status, :matricula_id, :valor_total_reais, :quantidade_faturas)
-                data = data << -1
-               end
-            #end
+            def after_create 
+                criaFatura.new(matricula: matricula, matricula.dia_vencimento_faturas, matricula.quantidade_faturas, valorFatura).perform
+            end
+            
 		end
 	end
 end
