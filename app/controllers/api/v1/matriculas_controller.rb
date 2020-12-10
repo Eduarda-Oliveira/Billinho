@@ -11,7 +11,7 @@ module Api
                 matricula = Matricula.find(params[:id])
                 render json: {status: 'SUCCESS', message:'Matricula carregada', data:matricula}, status: :ok
             end
-             # Criar uma nova matricula (e valor faturas)
+             # Criar uma nova matricula (e faturas)
             def create 
                 matricula = Matricula.new(matricula_params)
                 if matricula.save
@@ -19,20 +19,20 @@ module Api
                 else
                     render json: {status: 'ERROR', message:'Matricula not saved', data:matricula.errors}, status: :unprocessable_entity
                 end
-                #matricula.quantidade_faturas.times do
-                   
-               # end
             end
-            # parametros aceitos matricula
-            private
+             # parametros aceitos matricula
+             private
             def matricula_params
                 params.permit(:valor_total_reais, :quantidade_faturas, :dia_vencimento_faturas, :nome_curso, :aluno_id, :instituicao_id) 
-            end 
-             # parametros aceitos matricula
-            private
-            def fatura_params
-                params.permit(:status, :matricula_id)
             end
+             
+             
+            #quantidade_faturas.times do
+               def after_create 
+                criaFatura(:dia_vencimento_faturas, :valor_fatura_reais, :data_vencimento, :status, :matricula_id, :valor_total_reais, :quantidade_faturas)
+                data = data << -1
+               end
+            #end
 		end
 	end
 end

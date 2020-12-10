@@ -17,7 +17,7 @@ module Api
                 if aluno.save
                     render json: {status: 'SUCCESS', message:'Saved aluno', data:aluno}, status: :ok
                 else
-                    render json: {status: 'ERROR', message:'Aluno not saved', data:aluno.erros}, status: :unprocessable_entity
+                    render json: {status: 'ERROR', message:'Aluno not saved', data:aluno.errors}, status: :unprocessable_entity
                 end
             end 
             # parametros aceitos
