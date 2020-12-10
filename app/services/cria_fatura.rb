@@ -11,7 +11,7 @@ class CriaFatura < ApplicationController
     end
 
     def perform
-        criaData
+        createFatura
     end
 
     def statusDefault
@@ -21,21 +21,23 @@ class CriaFatura < ApplicationController
     def validaData
         data = Date.today
         dia = data.mday
-        return dia_vencimento <= dia
+        return dia_vencimento > dia
     end 
 
-    def mesInicio 
+    def dataInicio
         if validaData
-            dia = dia_vencimento
-            data = data << -1
+            Date.new(Date.today.cwyear,Date.today.mon, dia_vencimento)
         else
-            dia = dia_vencimento
+            Date.new(Date.today.cwyear,Date.today.mon, dia_vencimento).next_month
         end
-        mes = data.mon
-        ano = data.year
+    end  
+
+    def createFatura
+        quantidade.times do 
+            @matricula.faturas.create(valor_fatura_reais: valor, data_vencimento: dataInicio, status: statusDefault, matricula: matricula)
+        end
+
+        
     end
 
-    def criaInicio
-        data_vencimento = Date.new(ano, mes, dia)
-    end  
 end
