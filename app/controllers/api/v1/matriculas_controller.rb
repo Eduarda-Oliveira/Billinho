@@ -33,7 +33,6 @@ module Api
              
             after_create :criaFatura.new(fatura_params).perform
             end
-
             def fatura_params
                 params.permit(matricula: matricula, matricula.dia_vencimento_faturas, matricula.quantidade_faturas, valorFatura) 
             end
