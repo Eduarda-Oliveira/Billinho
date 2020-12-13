@@ -17,7 +17,7 @@ module Api
                 if instituicao.save
                     render json: {status: 'SUCCESS', message:'Saved instituicao', data:instituicao}, status: :ok
                 else
-                    render json: {status: 'ERROR', message:'Instituicao not saved', data:instituicao.erros}, status: :unprocessable_entity
+                    render json: {status: 'ERROR', message:'Instituicao not saved', data:instituicao.errors}, status: :unprocessable_entity
                 end
             end 
             # parametros aceitos

@@ -16,7 +16,7 @@ module Api
                 if fatura.save
                     render json: {status: 'SUCCESS', message:'Saved fatura', data:fatura}, status: :ok
                 else
-                    render json: {status: 'ERROR', message:'Fatura not saved', data:fatura.erros}, status: :unprocessable_entity
+                    render json: {status: 'ERROR', message:'Fatura not saved', data:fatura.errors}, status: :unprocessable_entity
                 end
             end
             private
