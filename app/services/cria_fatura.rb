@@ -1,4 +1,4 @@
-class CriaFatura < ApplicationController
+class CriaFatura 
     #indica as variaveis utilizadas, ele é para o acesso
     attr_accessor :matricula, :dia_vencimento, :valor, :quantidade, :fatura
 
@@ -13,6 +13,8 @@ class CriaFatura < ApplicationController
     def perform
         createFatura
     end
+
+    private
 
     def statusDefault
         'Aberta'
@@ -36,8 +38,6 @@ class CriaFatura < ApplicationController
         quantidade.times do 
             @matricula.faturas.create(valor_fatura_reais: valor, data_vencimento: dataInicio, status: statusDefault, matricula: matricula)
         end
-
-        
     end
 
 end

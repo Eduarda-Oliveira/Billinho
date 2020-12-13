@@ -5,4 +5,7 @@ class Matricula < ApplicationRecord
   validates :nome_curso, presence: true
   belongs_to :aluno
   belongs_to :instituicao
+  def dia_vencimento
+    return self.dia_vencimento_faturas
+  end
 end 

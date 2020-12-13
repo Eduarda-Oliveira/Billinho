@@ -17,66 +17,58 @@ module Api
                 matricula = Matricula.new(matricula_params)
                 if matricula.save
                     render json: {status: 'SUCCESS', message:'Saved matricula', data:matricula}, status: :ok
+                    createFatura(matricula_params)
                 else
                     render json: {status: 'ERROR', message:'Matricula not saved', data:matricula.errors}, status: :unprocessable_entity
-                end
+                end  
             end
              # parametros aceitos matricula
-             after_action:fatura
 
-             def fatura
-                fatura = createFatura.new(fatura_params).perform
-            end
              private
+            
             def matricula_params
                 params.permit(:valor_total_reais, :quantidade_faturas, :dia_vencimento_faturas, :nome_curso, :aluno_id, :instituicao_id) 
             end
             
-            def valorFatura
-                valor_total_reais/ quantidade_faturas 
+            def valorFatura(matricula_params)
+                (matricula_params[:valor_total_reais].to_f/ matricula_params[:quantidade_faturas]).round(2)
             end    
 
+            def fatura
+                CriaFatura.new().createFatura
+            end
 
             def fatura_params
-                params.permit(matricula :matricula, matricula.dia_vencimento_faturas, matricula.quantidade_faturas, valorFatura) 
-            end
-
-
-            #prepara os atricutos da classe
-            def initialize(params={})
-                @matricula = params[:matricula]
-                @dia_vencimento = params[:dia_vencimento_faturas]
-                @valor = params[:valorFatura]
-                @quantidade = params[:quantidade_faturas]
-            end
-
-            def perform
-                createFatura
+                params.permit(:matricula_id, :dia_vencimento, :quantidade_faturas, :valor)
             end
 
             def statusDefault
                 'Aberta'
             end
 
-            def validaData
+            def validaData(matricula_params)
                 data = Date.today
                 dia = data.mday
-                return dia_vencimento > dia
+                return matricula_params[:dia_vencimento_faturas] > dia
             end 
 
-            def dataInicio
-                if validaData
-                    Date.new(Date.today.cwyear,Date.today.mon, dia_vencimento)
+            def dataInicio(matricula_params)
+                if validaData(matricula_params)
+                    Date.new(Date.today.cwyear,Date.today.mon, matricula_params[:dia_vencimento_faturas] )
                 else
-                    Date.new(Date.today.cwyear,Date.today.mon, dia_vencimento).next_month
+                    Date.new(Date.today.cwyear,Date.today.mon, matricula_params[:dia_vencimento_faturas] ).next_month
                 end
             end  
 
-            def createFatura
-                #@quantidade.times do 
-                matricula.faturas.create(valor_fatura_reais: valor, data_vencimento: dataInicio, status: statusDefault, matricula_id: matricula)
-                #end
+            def createFatura(matricula_params)
+                quantidade = matricula_params[:quantidade_faturas]
+                dataVencimento = dataInicio(matricula_params)
+                quantidade.times do 
+                    Fatura.create(valor_fatura_reais: valorFatura(matricula_params), data_vencimento: dataVencimento, status: statusDefault, matricula_id: Matricula.last.id)
+                    dataVencimento = dataVencimento.next_month
+                end
             end
-		end
-	end
+
+        end
+    end
 end
