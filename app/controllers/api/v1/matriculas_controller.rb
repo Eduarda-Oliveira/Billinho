@@ -17,7 +17,11 @@ module Api
                 matricula = Matricula.new(matricula_params)
                 if matricula.save
                     render json: {status: 'SUCCESS', message:'Saved matricula', data:matricula}, status: :ok
-                    createFatura(matricula_params)
+                    CriaFatura.new( matricula_id: matricula.id, 
+                                    dia_vencimento_faturas: matricula.dia_vencimento_faturas, 
+                                    valorFatura: valorFatura(matricula_params), 
+                                    quantidade_faturas: matricula.quantidade_faturas
+                                    ).perform
                 else
                     render json: {status: 'ERROR', message:'Matricula not saved', data:matricula.errors}, status: :unprocessable_entity
                 end  
@@ -34,40 +38,6 @@ module Api
                 (matricula_params[:valor_total_reais].to_f/ matricula_params[:quantidade_faturas]).round(2)
             end    
 
-            def fatura
-                CriaFatura.new().createFatura
-            end
-
-            def fatura_params
-                params.permit(:matricula_id, :dia_vencimento, :quantidade_faturas, :valor)
-            end
-
-            def statusDefault
-                'Aberta'
-            end
-
-            def validaData(matricula_params)
-                data = Date.today
-                dia = data.mday
-                return matricula_params[:dia_vencimento_faturas] > dia
-            end 
-
-            def dataInicio(matricula_params)
-                if validaData(matricula_params)
-                    Date.new(Date.today.cwyear,Date.today.mon, matricula_params[:dia_vencimento_faturas] )
-                else
-                    Date.new(Date.today.cwyear,Date.today.mon, matricula_params[:dia_vencimento_faturas] ).next_month
-                end
-            end  
-
-            def createFatura(matricula_params)
-                quantidade = matricula_params[:quantidade_faturas]
-                dataVencimento = dataInicio(matricula_params)
-                quantidade.times do 
-                    Fatura.create(valor_fatura_reais: valorFatura(matricula_params), data_vencimento: dataVencimento, status: statusDefault, matricula_id: Matricula.last.id)
-                    dataVencimento = dataVencimento.next_month
-                end
-            end
 
         end
     end

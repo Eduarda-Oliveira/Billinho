@@ -4,7 +4,7 @@ class CriaFatura
 
     #prepara os atricutos da classe
     def initialize(params={})
-        @matricula = params[:matricula]
+        @matricula = Matricula.find(params[:matricula_id])
         @dia_vencimento = params[:dia_vencimento_faturas]
         @valor = params[:valorFatura]
         @quantidade = params[:quantidade_faturas]
@@ -35,8 +35,10 @@ class CriaFatura
     end  
 
     def createFatura
+        dataVencimento = dataInicio
         quantidade.times do 
-            @matricula.faturas.create(valor_fatura_reais: valor, data_vencimento: dataInicio, status: statusDefault, matricula: matricula)
+            Fatura.create(valor_fatura_reais: valor, data_vencimento: dataVencimento, status: statusDefault, matricula: matricula)
+            dataVencimento = dataVencimento.next_month
         end
     end
 
