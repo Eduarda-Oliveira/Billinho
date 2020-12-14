@@ -2,7 +2,7 @@ class CriaFatura
     #indica as variaveis utilizadas, ele é para o acesso
     attr_accessor :matricula, :dia_vencimento, :valor, :quantidade, :fatura
 
-    #prepara os atricutos da classe
+    #prepara os atributos da classe
     def initialize(params={})
         @matricula = Matricula.find(params[:matricula_id])
         @dia_vencimento = params[:dia_vencimento_faturas]
@@ -20,12 +20,14 @@ class CriaFatura
         'Aberta'
     end
 
+    #Verifica se o dia de vencimento é maior que o dia de hoje
     def validaData
         data = Date.today
         dia = data.mday
         return dia_vencimento > dia
     end 
 
+    #diz se as faturas começam no mes atual ou no seguinte
     def dataInicio
         if validaData
             Date.new(Date.today.cwyear,Date.today.mon, dia_vencimento)
@@ -33,7 +35,7 @@ class CriaFatura
             Date.new(Date.today.cwyear,Date.today.mon, dia_vencimento).next_month
         end
     end  
-
+ 
     def createFatura
         dataVencimento = dataInicio
         quantidade.times do 

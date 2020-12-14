@@ -1,9 +1,9 @@
-class VerificaFatura < ApplicationController
+class VerificaFatura < Fatura
     def matricula
         self.matricula
-      end
+    end
     
-      def Fatura
-        return((valor_fatura_reais * matricula.quantidade_faturas) == matricula.valor_total_reais)
-      end
+    def fatura
+      return((valor_fatura_reais * matricula.quantidade_faturas) == matricula.valor_total_reais)
+    end
 end

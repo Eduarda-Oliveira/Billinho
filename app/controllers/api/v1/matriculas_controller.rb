@@ -26,14 +26,13 @@ module Api
                     render json: {status: 'ERROR', message:'Matricula not saved', data:matricula.errors}, status: :unprocessable_entity
                 end  
             end
-             # parametros aceitos matricula
-
+             
              private
-            
+            # parametros aceitos matricula
             def matricula_params
                 params.permit(:valor_total_reais, :quantidade_faturas, :dia_vencimento_faturas, :nome_curso, :aluno_id, :instituicao_id) 
             end
-            
+            #valor da fatura com duas casas após a virgula
             def valorFatura(matricula_params)
                 (matricula_params[:valor_total_reais].to_f/ matricula_params[:quantidade_faturas]).round(2)
             end    
