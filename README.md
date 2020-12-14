@@ -1,6 +1,6 @@
 # BILLINHO
 
-## Índice
+## 🏁 Índice
 1. [Descrição](#descrição)
 2. [Tecnologias utilizadas](#tecnologias)
 3. [Instruções de uso](#instruções)
@@ -10,13 +10,17 @@
     2. [Aluno](#subentidade2)
     3. [Matrícula](#subentidade3)
     4. [Fatura](#subentidade4)
-5. [Another paragraph](#paragraph2)
+5. [Rotas](#rotas)
 
 ## Descrição <a name="descrição"></a>
-O projeto Billinho tem como objetivo simular uma API de gerenciamento das mensalidades pagas pelos alunos à instituição de ensino que ele estuda
+<p align="justify"> O Billinho é sistema de gestão de mensalidades pagas po alunos à instituição de ensino em que ele estuda </p>
 
-## Tecnologias utilizadas <a name="tecnologias"></a>
-
+## 🛠 Tecnologias utilizadas :books: <a name="tecnologias"></a>
+- [Ruby](https://ruby-doc.org/): versão 2.7.0
+- [Rails](https://guides.rubyonrails.org/): versão 5.2.4.4
+- [Postman](https://www.postman.com/api-documentation-tool/)
+- [Ubuntu](https://help.ubuntu.com/)
+- [PostgreSQL](https://www.postgresql.org/docs/)
 
 ## Instruções de uso <a name="tecnologias"></a>
 
@@ -55,5 +59,5 @@ O projeto Billinho tem como objetivo simular uma API de gerenciamento das mensal
 | ID da Matrícula | Chave Estrangeira | Não pode estar vazio |
 | Status |    Texto   | Não pode estar vazio, Aberta (default), Atrasada ou Paga |
 
-## Another paragraph <a name="paragraph2"></a>
+## Rotas <a name="rotas"></a>
 The second paragraph text
