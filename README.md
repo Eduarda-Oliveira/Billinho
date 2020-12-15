@@ -78,7 +78,7 @@
 
 ## :traffic_light: Rotas :traffic_light: <a name="rotas"></a>
 
-### :pencil: Instituição de Ensino :pencil: <a name="subentidade1"></a>
+### :pencil: Instituição de Ensino :pencil: <a name="suberota1"></a>
 - Vizualizar todas as instituições
 - GET localhost:3000/api/v1/instituicaos
 - Retorno
@@ -150,7 +150,7 @@
     }
 }
 ```
-### :runner: Aluno :runner: <a name="subentidade2"></a>
+### :runner: Aluno :runner: <a name="suberota2"></a>
 - Vizualizar todas os alunos
 - GET localhost:3000/api/v1/alunos 
 - Retorno
@@ -226,7 +226,7 @@
     }
 }
 ```
-### :notebook: Matrícula :notebook: <a name="subentidade3"></a>
+### :notebook: Matrícula :notebook: <a name="suberota3"></a>
 - Vizualizar todas as matrículas
 - GET localhost:3000/api/v1/matriculas
 - Retorno
@@ -313,7 +313,7 @@
     }
 }
 ```
-### :money_with_wings: Fatura :money_with_wings: <a name="subentidade4"></a>
+### :money_with_wings: Fatura :money_with_wings: <a name="suberota4"></a>
 - Vizualizar todas as faturas
 - GET localhost:3000/api/v1/faturas
 - Retorno
