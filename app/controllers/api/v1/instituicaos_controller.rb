@@ -9,8 +9,9 @@ module Api
              # Listar instituições passando ID
              def show
                 instituicao = Instituicao.find(params[:id])
-                render json: {status: 'SUCCESS', message:'Instituição carregada', data:Instituicao}, status: :ok
+                render json: {status: 'SUCCESS', message:'Instituição carregada', data:instituicao}, status: :ok
             end
+            
              # Criar uma nova instituição
              def create 
                 instituicao = Instituicao.new(instituicao_params)
