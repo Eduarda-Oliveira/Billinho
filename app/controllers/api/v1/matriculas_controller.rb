@@ -26,12 +26,22 @@ module Api
                     render json: {status: 'ERROR', message:'Matricula not saved', data:matricula.errors}, status: :unprocessable_entity
                 end  
             end
+            # Exclui matricula e suas faturas
             def destroy
 				matricula = Matricula.find(params[:id])
                 matricula.fatura.each(&:destroy)
                 matricula.destroy
 				render json: {status: 'SUCCESS', message:'Deleted matricula', data:matricula},status: :ok
             end
+            # Atualiza matricula
+			def update
+				matricula = Matricula.find(params[:id])
+				if matricula.update_attributes(matricula_params)
+					render json: {status: 'SUCCESS', message:'Updated matricula', data:matricula},status: :ok
+				else
+					render json: {status: 'ERROR', message:'Matricula not update', data:matricula.errors},status: :unprocessable_entity
+				end
+			end
              private
             # parametros aceitos matricula
             def matricula_params

@@ -26,7 +26,7 @@ module Api
 				fatura.destroy
 				render json: {status: 'SUCCESS', message:'Deleted fatura', data:fatura},status: :ok
             end
-            # Atualizar um fatura
+            # Atualiza fatura
 			def update
 				fatura = Fatura.find(params[:id])
 				if fatura.update_attributes(fatura_params)
