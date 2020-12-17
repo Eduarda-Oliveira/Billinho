@@ -5,12 +5,12 @@ module Api
             # Listar todas as matriculas
             def index
                 matriculas = Matricula.order('created_at DESC');
-                render json: {status: 'SUCCESS', message: 'Matriculas carregadas', data:matriculas}, status: :ok
+                render json: {status: 'SUCCESS', message: 'Matriculas loaded', data:matriculas}, status: :ok
             end
             # Listar matriculas passando ID
             def show
                 matricula = Matricula.find(params[:id])
-                render json: {status: 'SUCCESS', message:'Matricula carregada', data:matricula}, status: :ok
+                render json: {status: 'SUCCESS', message:'Matricula loaded', data:matricula}, status: :ok
             end
              # Criar uma nova matricula (e faturas)
             def create 

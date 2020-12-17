@@ -4,12 +4,12 @@ module Api
             # Listar todas as instituiçoes de ensino
             def index
                 instituicaos = Instituicao.order('created_at DESC');
-                render json: {status: 'SUCCESS', message: 'Instituições de ensino carregadas', data:instituicaos}, status: :ok
+                render json: {status: 'SUCCESS', message: 'Instituições de ensino loaded', data:instituicaos}, status: :ok
             end
              # Listar instituições passando ID
              def show
                 instituicao = Instituicao.find(params[:id])
-                render json: {status: 'SUCCESS', message:'Instituição carregada', data:instituicao}, status: :ok
+                render json: {status: 'SUCCESS', message:'Instituição loaded', data:instituicao}, status: :ok
             end
             
              # Criar uma nova instituição
@@ -20,7 +20,22 @@ module Api
                 else
                     render json: {status: 'ERROR', message:'Instituicao not saved', data:instituicao.errors}, status: :unprocessable_entity
                 end
-            end 
+            end
+            # Exclui instituição
+			def destroy
+				instituicao = Instituicao.find(params[:id])
+				instituicao.destroy
+				render json: {status: 'SUCCESS', message:'Deleted instituicao', data:instituicao},status: :ok
+            end
+            # Atualiza instituicao
+			def update
+				instituicao = Instituicao.find(params[:id])
+				if instituicao.update_attributes(instituicao_params)
+					render json: {status: 'SUCCESS', message:'Updated instituicao', data:instituicao},status: :ok
+				else
+					render json: {status: 'ERROR', message:'instituicao not update', data:instituicao.errors},status: :unprocessable_entity
+				end
+			end
             # parametros aceitos
             private
             def instituicao_params
