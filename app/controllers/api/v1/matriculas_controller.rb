@@ -17,7 +17,7 @@ module Api
                 matricula = Matricula.new(matricula_params)
                 if matricula.save
                     render json: {status: 'SUCCESS', message:'Saved matricula', data:matricula}, status: :ok
-                    CriaFatura.new( matricula_id: matricula.id, 
+                    CriaFaturasMatricula.new( matricula_id: matricula.id, 
                                     dia_vencimento_faturas: matricula.dia_vencimento_faturas, 
                                     valorFatura: valorFatura(matricula_params), 
                                     quantidade_faturas: matricula.quantidade_faturas
@@ -26,7 +26,12 @@ module Api
                     render json: {status: 'ERROR', message:'Matricula not saved', data:matricula.errors}, status: :unprocessable_entity
                 end  
             end
-             
+            def destroy
+				matricula = Matricula.find(params[:id])
+                matricula.fatura.each(&:destroy)
+                matricula.destroy
+				render json: {status: 'SUCCESS', message:'Deleted matricula', data:matricula},status: :ok
+            end
              private
             # parametros aceitos matricula
             def matricula_params

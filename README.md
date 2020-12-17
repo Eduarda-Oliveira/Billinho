@@ -17,7 +17,7 @@
     4. [Fatura](#subrota4)
 
 ## :books: Descrição :books: <a name="descrição"></a>
-<p align="justify"> O Billinho é sistema de gestão de mensalidades pagas po alunos à instituição de ensino em que ele estuda </p>
+<p align="justify"> O Billinho é sistema de gestão de mensalidades pagas por alunos à instituição de ensino em que ele estuda. </p>
 
 ## :computer: Tecnologias utilizadas :computer: <a name="tecnologias"></a>
 - [Ruby](https://ruby-doc.org/): versão 2.7.0
@@ -26,7 +26,7 @@
 - [Ubuntu](https://help.ubuntu.com/)
 - [PostgreSQL](https://www.postgresql.org/docs/)
 
-## :rocket: Instruções de uso :rocket: <a name="tecnologias"></a>
+## :rocket: Instruções de uso :rocket: <a name="instruções"></a>
 - No terminal, clone o projeto:
     - git clone https://github.com/Eduarda-Oliveira/Billinho.git
 - Entre na pasta do projeto:

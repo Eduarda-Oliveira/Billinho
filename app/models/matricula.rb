@@ -5,4 +5,5 @@ class Matricula < ApplicationRecord
   validates :nome_curso, presence: true
   belongs_to :aluno
   belongs_to :instituicao
+  has_many :fatura
 end 
