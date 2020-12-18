@@ -553,6 +553,7 @@
         "updated_at": "2020-12-16T15:22:19.714Z"
     }
 }
+```
 - Atualizar fatura
 - PUT localhost:3000/api/v1/faturas/834
 - Parâmetros necessários: valor_fatura_reais/data_vencimento/matricula_id/status, ID da fatura
@@ -577,3 +578,4 @@
         "updated_at": "2020-12-18T18:33:01.620Z"
     }
 }
+```
