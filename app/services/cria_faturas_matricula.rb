@@ -36,18 +36,21 @@ class CriaFaturasMatricula
         end
     end  
 
-    #mantem o dia da cobrança certo
-    #def validaDia(dataVencimento)
-     #  dataCobranca = Date.new(dataVencimento.cwyear,dataVencimento.mon, dia_vencimento.to_i) rescue
-      # while dataCobranca.nil? do
-       # dataCobranca = Date.new(dataVencimento.cwyear,dataVencimento.mon, dia_vencimento.to_i - 1) rescue
-      # end
-   # end
+    #mantem o dia da cobrança certo 
+    def validaDia(dataVencimento)
+       dataCobranca = Date.new(dataVencimento.cwyear,dataVencimento.mon, dia_vencimento.to_i) rescue
+       if dataCobranca.nil? 
+        dataCobranca = dataVencimento.end_of_month
+       else
+        dataCobranca = Date.new(dataVencimento.cwyear,dataVencimento.mon, dia_vencimento.to_i) 
+       end
+    end
+    
 
     def createFatura
         dataVencimento = dataInicio
         quantidade.times do 
-            Fatura.create(valor_fatura_reais: valor, data_vencimento: dataVencimento, status: statusDefault, matricula: matricula)
+            Fatura.create(valor_fatura_reais: valor, data_vencimento: validaDia(dataVencimento), status: statusDefault, matricula: matricula)
             dataVencimento = dataVencimento.next_month
         end
     end

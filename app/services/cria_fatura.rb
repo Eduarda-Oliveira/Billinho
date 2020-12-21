@@ -1,6 +1,6 @@
 class CriaFatura
   #indica as variaveis utilizadas, ele é para o acesso
-  attr_accessor :matricula, :valor, :quantidade, :total
+  attr_accessor :matricula, :valor, :quantidade, :total, :vencimento
 
   #prepara os atributos da classe
   def initialize(params={})
@@ -26,7 +26,7 @@ class CriaFatura
   end
 
   def createFatura
-    Fatura.create(valor_fatura_reais: valor, data_vencimento: @vencimento, status: statusDefault, matricula: matricula)
+    Fatura.create(valor_fatura_reais: valor, data_vencimento: vencimento, status: statusDefault, matricula: matricula)
   end
 end
  
