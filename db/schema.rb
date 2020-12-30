@@ -10,54 +10,54 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_03_190632) do
+ActiveRecord::Schema.define(version: 2020_12_23_232656) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "alunos", force: :cascade do |t|
-    t.string "nome"
-    t.string "cpf"
-    t.date "data_nascimento"
-    t.integer "telefone_celular"
-    t.string "genero"
-    t.string "meio_pagamento_fatura"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "faturas", force: :cascade do |t|
-    t.decimal "valor_fatura_reais"
-    t.date "data_vencimento"
+  create_table "bills", force: :cascade do |t|
+    t.decimal "value"
+    t.date "due_date"
     t.string "status"
-    t.bigint "matricula_id"
+    t.bigint "enrollment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["matricula_id"], name: "index_faturas_on_matricula_id"
+    t.index ["enrollment_id"], name: "index_bills_on_enrollment_id"
   end
 
-  create_table "instituicaos", force: :cascade do |t|
-    t.string "nome"
+  create_table "enrollments", force: :cascade do |t|
+    t.decimal "full_value"
+    t.integer "installments"
+    t.integer "due_day"
+    t.string "course"
+    t.bigint "student_id"
+    t.bigint "institution_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["institution_id"], name: "index_enrollments_on_institution_id"
+    t.index ["student_id"], name: "index_enrollments_on_student_id"
+  end
+
+  create_table "institutions", force: :cascade do |t|
+    t.string "name"
     t.string "cnpj"
-    t.string "tipo"
+    t.string "institution_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "matriculas", force: :cascade do |t|
-    t.decimal "valor_total_reais"
-    t.integer "quantidade_faturas"
-    t.integer "dia_vencimento_faturas"
-    t.string "nome_curso"
-    t.bigint "aluno_id"
-    t.bigint "instituicao_id"
+  create_table "students", force: :cascade do |t|
+    t.string "name"
+    t.string "cpf"
+    t.date "birth"
+    t.integer "telephone"
+    t.string "gender"
+    t.string "payment_method"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["aluno_id"], name: "index_matriculas_on_aluno_id"
-    t.index ["instituicao_id"], name: "index_matriculas_on_instituicao_id"
   end
 
-  add_foreign_key "faturas", "matriculas"
-  add_foreign_key "matriculas", "alunos"
-  add_foreign_key "matriculas", "instituicaos"
+  add_foreign_key "bills", "enrollments"
+  add_foreign_key "enrollments", "institutions"
+  add_foreign_key "enrollments", "students"
 end
