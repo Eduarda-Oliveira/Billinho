@@ -34,7 +34,7 @@ module Api
       # Atualiza bill
       def update
         bill = Bill.find(params[:id])
-        if bill.update_attributes(bill_params)
+        if bill.update(bill_params)
           render json: { status: 'SUCCESS', message: 'Updated bill', data: bill }, status: :ok
         else
           render json: { status: 'ERROR', message: 'Bill not update', data: bill.errors },

@@ -1,10 +1,10 @@
 module Api
   module V1
     class Api::V1::InstitutionsController < ApplicationController
-      # Listar todas as instituiçoes de ensino
+      # Listar todas as instituicoes de ensino
       def index
         institutions = Institution.order('created_at DESC')
-        render json: { status: 'SUCCESS', message: 'Institutions de ensino loaded', data: institutions },
+        render json: { status: 'SUCCESS', message: 'Institutions loaded', data: institutions },
                status: :ok
       end
 
@@ -35,7 +35,7 @@ module Api
       # Atualiza institution
       def update
         institution = Institution.find(params[:id])
-        if institution.update_attributes(institution_params)
+        if institution.update(institution_params)
           render json: { status: 'SUCCESS', message: 'Updated institution', data: institution }, status: :ok
         else
           render json: { status: 'ERROR', message: 'Institution not update', data: institution.errors },

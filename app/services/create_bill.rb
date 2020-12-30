@@ -13,12 +13,12 @@ class CreateBill
 
   def perform
     validate
-    createBill
+    create_bill
   end
 
   private
 
-  def statusDefault
+  def status_default
     'Aberta'
   end
 
@@ -26,7 +26,7 @@ class CreateBill
     raise 'O valor não corresponde a matricula' if (value * enrollment.installments) != enrollment.full_value
   end
 
-  def createBill
-    Bill.create(value: value, due_date: due_date, status: statusDefault, enrollment: enrollment)
+  def create_bill
+    Bill.create(value: value, due_date: due_date, status: status_default, enrollment: enrollment)
   end
 end

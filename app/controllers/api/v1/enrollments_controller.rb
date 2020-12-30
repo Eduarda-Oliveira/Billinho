@@ -11,7 +11,7 @@ module Api
       # Listar enrollments passando ID
       def show
         enrollment = Enrollment.find(params[:id])
-        render json: { status: 'SUCCESS', message: 'MatriculEnrollmenta loaded', data: enrollment },
+        render json: { status: 'SUCCESS', message: 'Enrollment loaded', data: enrollment },
                status: :ok
       end
 
@@ -41,7 +41,7 @@ module Api
       # Atualiza enrollment
       def update
         enrollment = Enrollment.find(params[:id])
-        if enrollment.update_attributes(enrollment_params)
+        if enrollment.update(enrollment_params)
           render json: { status: 'SUCCESS', message: 'Updated enrollment', data: enrollment }, status: :ok
         else
           render json: { status: 'ERROR', message: 'Enrollment not update', data: enrollment.errors },
@@ -56,7 +56,7 @@ module Api
         params.permit(:full_value, :installments, :due_day, :course, :student_id, :institution_id)
       end
 
-      # valor da fatura com duas casas após a virgula
+      # valor da fatura com duas casas apos a virgula
       def billValue(enrollment_params)
         (enrollment_params[:full_value].to_f / enrollment_params[:installments]).round(2)
       end

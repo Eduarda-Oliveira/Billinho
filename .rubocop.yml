@@ -1,6 +1,6 @@
-#inherit_from: .rubocop_todo.yml
 
+RuboCop
 require: rubocop-rails
 
-#inherit_from:
-#  - .rubocop_todo.ymltu
+Style/FrozenStringLiteralComment:
+ Enabled: false

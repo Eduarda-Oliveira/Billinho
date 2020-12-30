@@ -1,5 +1,5 @@
 class CreateEnrollmentBills
-  # indica as variaveis utilizadas, ele é para o acesso
+  # indica as variaveis utilizadas, ele e para o acesso
   attr_accessor :enrollment, :due_day, :value, :installments, :bill
 
   # prepara os atributos da classe
@@ -11,50 +11,50 @@ class CreateEnrollmentBills
   end
 
   def perform
-    createBill
+    create_bill
   end
 
   private
 
-  def statusDefault
+  def status_default
     'Aberta'
   end
 
   # Verifica se o dia de vencimento e maior que o dia de hoje
-  def validDate
+  def valid_date
     date = Date.today
     day = date.mday
     due_day > day
   end
 
-  # diz se as faturas começam no mes atual ou no seguinte
-  def startDate
-    if validDate
+  # diz se as faturas comecam no mes atual ou no seguinte
+  def start_date
+    if valid_date
       Date.new(Date.today.cwyear, Date.today.mon, due_day)
     else
       Date.new(Date.today.cwyear, Date.today.mon, due_day).next_month
     end
   end
 
-  # mantem o dia da cobrança certo
-  def validDay(dueDate)
-    billDueDate = begin
-      Date.new(dueDate.cwyear, dueDate.mon, due_day.to_i)
+  # mantem o dia da cobranca certo
+  def valid_day(due_date)
+    bill_due_date = begin
+      Date.new(due_date.cwyear, due_date.mon, due_day.to_i)
     rescue StandardError
-      billDueDate = if billDueDate.nil?
-                      dueDate.end_of_month
-                    else
-                      Date.new(dueDate.cwyear, dueDate.mon,
-                               due_day.to_i)
-                    end
+      bill_due_date = if due_date.nil?
+                        due_date.end_of_month
+                      else
+                        Date.new(due_date.cwyear, due_date.mon,
+                                 due_day.to_i)
+                      end
     end
   end
 
-  def createBill
-    dueDate = startDate
+  def create_bill
+    due_date = start_date
     installments.times do
-      Bill.create(value: value, due_date: validDay(dueDate), status: statusDefault, enrollment: enrollment)
-      dueDate = dueDate.next_month
+      Bill.create(value: value, due_date: valid_day(due_date), status: status_default, enrollment: enrollment)
+      due_date = due_date.next_month
     end
   end
 end

@@ -4,11 +4,11 @@ class Institution < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates :cnpj, uniqueness: true, numericality: { only_integer: true }
   validates :institution_type, presence: true, inclusion: { in: %w[Universidade Escola Creche] }
-  validate :validCnpj
+  validate :valid_cnpj
 
   private
 
-  def validCnpj
+  def valid_cnpj
     if CNPJ.valid?(cnpj)
       cnpj = CNPJ.new(self.cnpj)
       cnpj = cnpj.formatted

@@ -10,7 +10,7 @@ module Api
       # Listar students passando ID
       def show
         student = Student.find(params[:id])
-        render json: { status: 'SUCCESS', message: 'Aluno loaded', data: student }, status: :ok
+        render json: { status: 'SUCCESS', message: 'Student loaded', data: student }, status: :ok
       end
 
       # Criar um novo student
@@ -19,7 +19,7 @@ module Api
         if student.save
           render json: { status: 'SUCCESS', message: 'Saved student', data: student }, status: :ok
         else
-          render json: { status: 'ERROR', message: 'Aluno not saved', data: student.errors },
+          render json: { status: 'ERROR', message: 'Student not saved', data: student.errors },
                  status: :unprocessable_entity
         end
       end
@@ -34,10 +34,10 @@ module Api
       # Atualiza student
       def update
         student = Student.find(params[:id])
-        if student.update_attributes(student_params)
+        if student.update(student_params)
           render json: { status: 'SUCCESS', message: 'Updated student', data: student }, status: :ok
         else
-          render json: { status: 'ERROR', message: 'Aluno not update', data: student.errors },
+          render json: { status: 'ERROR', message: 'Student not update', data: student.errors },
                  status: :unprocessable_entity
         end
       end
