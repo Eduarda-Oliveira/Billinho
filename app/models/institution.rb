@@ -2,7 +2,7 @@ class Institution < ApplicationRecord
     require 'cpf_cnpj'
   
     validates :name, presence: true, uniqueness: true
-    validates :cnpj, uniqueness: true, numericality: { only_integer: true }
+    validates :cnpj, uniqueness: true, format: { with: /\d+/}
     validates :institution_type, presence: true, inclusion: { in: %w[Universidade Escola Creche] }
     validate :valid_cnpj
   
@@ -10,9 +10,9 @@ class Institution < ApplicationRecord
   
     def valid_cnpj
       if CNPJ.valid?(cnpj)
-        cnpj = CNPJ.new(self.cnpj)
-        cnpj = cnpj.formatted
-        self.cnpj = cnpj
+        x = CNPJ.new(cnpj)
+        x = x.stripped
+        self.cnpj = x
       end
     end
   end

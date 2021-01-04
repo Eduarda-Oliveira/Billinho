@@ -1,6 +1,6 @@
 module Api
   module V1
-    class Api::V1::EnrollmentsController < ApplicationController
+    class EnrollmentsController < ApplicationController
       # include criaFatura
       # Listar todas as enrollments
       def index
@@ -19,11 +19,13 @@ module Api
       def create
         enrollment = Enrollment.new(enrollment_params)
         if enrollment.save
-          render json: { status: 'SUCCESS', message: 'Saved enrollment', data: enrollment }, status: :ok
           CreateEnrollmentBills.new(enrollment_id: enrollment.id,
                                     due_day: enrollment.due_day,
-                                    billValue: billValue(enrollment_params),
+                                    value: bill_value(enrollment_params),
                                     installments: enrollment.installments).perform
+          render json: { status: 'SUCCESS', message: 'Saved enrollment', data: enrollment }, 
+                 status: :ok
+
         else
           render json: { status: 'ERROR', message: 'Enrollment not saved', data: enrollment.errors },
                  status: :unprocessable_entity
@@ -57,7 +59,7 @@ module Api
       end
 
       # valor da fatura com duas casas apos a virgula
-      def billValue(enrollment_params)
+      def bill_value(enrollment_params)
         (enrollment_params[:full_value].to_f / enrollment_params[:installments]).round(2)
       end
     end

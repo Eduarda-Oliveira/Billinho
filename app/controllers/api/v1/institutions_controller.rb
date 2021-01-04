@@ -1,6 +1,6 @@
 module Api
   module V1
-    class Api::V1::InstitutionsController < ApplicationController
+    class InstitutionsController < ApplicationController
       # Listar todas as instituicoes de ensino
       def index
         institutions = Institution.order('created_at DESC')
