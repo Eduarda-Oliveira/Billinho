@@ -2,12 +2,12 @@
 
 one:
   value: 9.99
-  due_date: 2020-12-23
+  due_date: 2021-01-03
   status: MyString
   enrollment: one
 
 two:
   value: 9.99
-  due_date: 2020-12-23
+  due_date: 2021-01-03
   status: MyString
   enrollment: two
