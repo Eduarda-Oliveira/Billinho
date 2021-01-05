@@ -45,7 +45,7 @@ module Api
       private
 
       def bill_params
-        params.permit(:value, :due_date, :status, :enrollment_id)
+        params.permit(:amount_cents, :amount_currency, :due_date, :status, :enrollment_id)
       end
     end
   end

@@ -21,7 +21,7 @@ module Api
         if enrollment.save
           CreateEnrollmentBills.new(enrollment_id: enrollment.id,
                                     due_day: enrollment.due_day,
-                                    value: bill_value(enrollment_params),
+                                    amount_cents: bill_value(enrollment_params),
                                     installments: enrollment.installments).perform
           render json: { status: 'SUCCESS', message: 'Saved enrollment', data: enrollment }, 
                  status: :ok
@@ -55,12 +55,12 @@ module Api
 
       # parametros aceitos enrollment
       def enrollment_params
-        params.permit(:full_value, :installments, :due_day, :course, :student_id, :institution_id)
+        params.permit(:amount_cents, :amount_currency, :installments, :due_day, :course, :student_id, :institution_id)
       end
 
       # valor da fatura com duas casas apos a virgula
       def bill_value(enrollment_params)
-        (enrollment_params[:full_value].to_f / enrollment_params[:installments]).round(2)
+        (enrollment_params[:amount_cents] / enrollment_params[:installments])
       end
     end
   end
