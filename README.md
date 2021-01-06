@@ -46,35 +46,36 @@
 ### :pencil: Instituição de Ensino :pencil: <a name="subentidade1"></a>
 | Campo   |      Tipo      |  Restrições |
 |----------|:-------------:|------:|
-| Nome |  Texto| Não pode estar vazio, único |
-| CNPJ |    Texto   |   Apenas caracteres numéricos, único |
-| Tipo | Texto |    Universidade, Escola ou Creche |
+| Nome | Texto | Não pode estar vazio, único |
+| CNPJ | Texto | Apenas caracteres numéricos, único |
+| Tipo | Texto | Universidade, Escola ou Creche |
 
 ### :runner: Aluno :runner: <a name="subentidade2"></a>
 | Campo   |      Tipo      |  Restrições |
 |----------|:-------------:|------:|
-| Nome |  Texto| Não pode estar vazio, único |
-| CPF |    Texto   |  Não pode estar vazio, apenas caracteres numéricos, único|
+| Nome | Texto | Não pode estar vazio, único |
+| CPF | Texto | Não pode estar vazio, apenas caracteres numéricos, único |
 | Data de nascimento | Data |    |
-| Gênero |    Texto   |  Não pode estar vazio, M ou F|
-| Meio de pagamento das faturas |    Texto   |  Não pode estar vazio, Boleto ou Cartão|
+| Telefone celular | Inteiro |    |
+| Gênero | Texto | Não pode estar vazio, M ou F |
+| Meio de pagamento das faturas | Texto | Não pode estar vazio, Boleto ou Cartão |
 
 ### :notebook: Matrícula :notebook: <a name="subentidade3"></a>
 | Campo   |      Tipo      |  Restrições |
 |----------|:-------------:|------:|
-| Valor total curso em reais |  Decimal| Não pode estar vazio, >0|
-| Quantidade de faturas |    Inteiro   |  Não pode estar vazio, >=1|
-| Dia de vencimento das faturas |    Inteiro   |  Não pode estar vazio,>=1, <=31|
-| Nome do curso |    Texto   |  Não pode estar vazio|
-| ID da Instituição |    Chave Estrangeira    |  Não pode estar vazio|
-| Id do Aluno |    Chave Estrangeira   |  Não pode estar vazio|
+| Valor total curso em reais | Decimal| Não pode estar vazio, >0 |
+| Quantidade de faturas | Inteiro | Não pode estar vazio, >=1 |
+| Dia de vencimento das faturas | Inteiro | Não pode estar vazio,>=1, <=31 |
+| Nome do curso | Texto |  Não pode estar vazio |
+| ID da Instituição | Chave Estrangeira | Não pode estar vazio |
+| Id do Aluno | Chave Estrangeira | Não pode estar vazio |
 ### :money_with_wings: Fatura :money_with_wings: <a name="subentidade4"></a>
 | Campo   |      Tipo      |  Restrições |
 |----------|:-------------:|------:|
-| Valor fatura em reais |  Decimal| Não pode estar vazio, >0|
-| Data de vencimento |    Data   | Não pode estar vazio |
+| Valor fatura em reais | Decimal| Não pode estar vazio, >0 |
+| Data de vencimento | Data | Não pode estar vazio |
 | ID da Matrícula | Chave Estrangeira | Não pode estar vazio |
-| Status |    Texto   | Não pode estar vazio, Aberta (default), Atrasada ou Paga |
+| Status | Texto | Não pode estar vazio, Aberta (default), Atrasada ou Paga |
 
 ## :traffic_light: Rotas :traffic_light: <a name="rotas"></a>
 
