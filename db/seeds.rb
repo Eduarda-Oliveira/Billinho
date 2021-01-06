@@ -15,7 +15,7 @@
                                      institution_type: %w[Universidade Escola Creche].sample
                                    })
   enrollment = Enrollment.create({
-                                   full_value: enrollmentFullValue,
+                                   amount_cents: enrollmentFullValue,
                                    installments: bill,
                                    due_day: Faker::Number.between(from: 1, to: 31),
                                    course: Faker::Educator.course_name,
@@ -24,7 +24,7 @@
                                  })
   bill.times do
     Bill.create({
-                  value: enrollmentFullValue / bill,
+                  amount_cents: enrollmentFullValue / bill,
                   due_date: Faker::Date.between(from: '2014-09-23', to: '2021-09-25'),
                   status: %w[Aberta Atrasada Paga].sample,
                   enrollment: enrollment
