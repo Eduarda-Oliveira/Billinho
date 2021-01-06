@@ -1,6 +1,7 @@
 class Institution < ApplicationRecord
-    require 'cpf_cnpj'
-  
+
+    has_many :enrollments
+    
     validates :name, presence: true, uniqueness: true
     validates :cnpj, uniqueness: true, format: { with: /\d+/}
     validates :institution_type, presence: true, inclusion: { in: %w[Universidade Escola Creche] }

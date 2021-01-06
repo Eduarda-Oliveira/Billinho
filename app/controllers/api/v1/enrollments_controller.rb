@@ -35,7 +35,7 @@ module Api
       # Exclui enrollment e suas faturas
       def destroy
         enrollment = Enrollment.find(params[:id])
-        enrollment.bill.each(&:destroy)
+        enrollment.bills.each(&:destroy)
         enrollment.destroy
         render json: { status: 'SUCCESS', message: 'Deleted enrollment', data: enrollment }, status: :ok
       end

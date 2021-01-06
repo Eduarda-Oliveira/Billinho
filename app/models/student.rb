@@ -1,5 +1,7 @@
 class Student < ApplicationRecord
   
+    has_many :enrollments
+
     validates :name, presence: true, uniqueness: true
     validates :cpf, presence: true, uniqueness: true, format: { with: /\d+/}
     validates :gender, presence: true, inclusion: { in: %w[F M] }
