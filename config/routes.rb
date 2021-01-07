@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   namespace 'api' do
     namespace 'v1' do
-      resources :alunos
-      resources :matriculas
-      resources :instituicaos
-      resources :faturas 
+      resources :students
+      resources :enrollments
+      resources :institutions
+      resources :bills
     end
-  end  
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

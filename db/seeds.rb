@@ -1,34 +1,33 @@
-50.times do
-    fatura = [6, 12, 18, 24].sample
-    valorMatricula = Faker::Number.positive
-    aluno = Aluno.create({
-        nome: Faker::Name.name,
-        cpf: Faker::Number.number(digits: 11),
-        data_nascimento: Faker::Date.birthday(min_age: 17, max_age: 80),
-        telefone_celular: Faker::Number.number(digits: 9),
-        genero: ["M","F"].sample,
-        meio_pagamento_fatura: ["Cartão","Boleto"].sample
-    })
-    instituicao = Instituicao.create({
-        nome: Faker::University.name,
-        cnpj: Faker::Company.brazilian_company_number(formatted: false),
-        tipo: ["Universidade", "Escola", "Creche"].sample
-    })
-    matricula = Matricula.create({
-        valor_total_reais: valorMatricula,
-        quantidade_faturas: fatura,
-        dia_vencimento_faturas: Faker::Number.between(from: 1, to: 31),
-        nome_curso: Faker::Educator.course_name,
-        instituicao: instituicao,
-        aluno: aluno
-    })
-
-    fatura.times do
-        Fatura.create({
-            valor_fatura_reais: valorMatricula/ fatura,
-            data_vencimento: Faker::Date.between(from: '2014-09-23', to: '2021-09-25'),
-            status: ["Aberta", "Atrasada", "Paga"].sample,
-            matricula: matricula
-        }) 
-    end
+30.times do
+  bill = [6, 12, 18, 24].sample
+  enrollmentFullValue = Faker::Number.positive
+  student = Student.create({
+                             name: Faker::Name.name,
+                             cpf: Faker::Number.number(digits: 11),
+                             birth: Faker::Date.birthday(min_age: 17, max_age: 80),
+                             telephone: Faker::Number.number(digits: 9),
+                             gender: %w[M F].sample,
+                             payment_method: %w[Cartão Boleto].sample
+                           })
+  institution = Institution.create({
+                                     name: Faker::University.name,
+                                     cnpj: Faker::Company.brazilian_company_number(formatted: false),
+                                     institution_type: %w[Universidade Escola Creche].sample
+                                   })
+  enrollment = Enrollment.create({
+                                   amount_cents: enrollmentFullValue,
+                                   installments: bill,
+                                   due_day: Faker::Number.between(from: 1, to: 31),
+                                   course: Faker::Educator.course_name,
+                                   institution: institution,
+                                   student: student
+                                 })
+  bill.times do
+    Bill.create({
+                  amount_cents: enrollmentFullValue / bill,
+                  due_date: Faker::Date.between(from: '2014-09-23', to: '2021-09-25'),
+                  status: %w[Aberta Atrasada Paga].sample,
+                  enrollment: enrollment
+                })
+  end
 end

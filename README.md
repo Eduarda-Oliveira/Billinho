@@ -46,476 +46,475 @@
 ### :pencil: Instituição de Ensino :pencil: <a name="subentidade1"></a>
 | Campo   |      Tipo      |  Restrições |
 |----------|:-------------:|------:|
-| Nome |  Texto| Não pode estar vazio, único |
-| CNPJ |    Texto   |   Apenas caracteres numéricos, único |
-| Tipo | Texto |    Universidade, Escola ou Creche |
+| Name | Texto | Não pode estar vazio, único |
+| CNPJ | Texto | Apenas caracteres numéricos, único |
+| Institution type | Texto | Universidade, Escola ou Creche |
 
 ### :runner: Aluno :runner: <a name="subentidade2"></a>
 | Campo   |      Tipo      |  Restrições |
 |----------|:-------------:|------:|
-| Nome |  Texto| Não pode estar vazio, único |
-| CPF |    Texto   |  Não pode estar vazio, apenas caracteres numéricos, único|
-| Data de nascimento | Data |    |
-| Gênero |    Texto   |  Não pode estar vazio, M ou F|
-| Meio de pagamento das faturas |    Texto   |  Não pode estar vazio, Boleto ou Cartão|
+| Name | Texto | Não pode estar vazio, único |
+| CPF | Texto | Não pode estar vazio, apenas caracteres numéricos, único |
+| Birth | Data |    |
+| Telephone | Inteiro |    |
+| gender | Texto | Não pode estar vazio, M ou F |
+| Payment method | Texto | Não pode estar vazio, Boleto ou Cartão |
 
 ### :notebook: Matrícula :notebook: <a name="subentidade3"></a>
 | Campo   |      Tipo      |  Restrições |
 |----------|:-------------:|------:|
-| Valor total curso em reais |  Decimal| Não pode estar vazio, >0|
-| Quantidade de faturas |    Inteiro   |  Não pode estar vazio, >=1|
-| Dia de vencimento das faturas |    Inteiro   |  Não pode estar vazio,>=1, <=31|
-| Nome do curso |    Texto   |  Não pode estar vazio|
-| ID da Instituição |    Chave Estrangeira    |  Não pode estar vazio|
-| Id do Aluno |    Chave Estrangeira   |  Não pode estar vazio|
+| Full value | Decimal| Não pode estar vazio, >0 |
+| Installments | Inteiro | Não pode estar vazio, >=1 |
+| Due day| Inteiro | Não pode estar vazio,>=1, <=31 |
+| Course | Texto |  Não pode estar vazio |
+| Institution ID | Chave Estrangeira | Não pode estar vazio |
+| Student Id | Chave Estrangeira | Não pode estar vazio |
+
 ### :money_with_wings: Fatura :money_with_wings: <a name="subentidade4"></a>
 | Campo   |      Tipo      |  Restrições |
 |----------|:-------------:|------:|
-| Valor fatura em reais |  Decimal| Não pode estar vazio, >0|
-| Data de vencimento |    Data   | Não pode estar vazio |
-| ID da Matrícula | Chave Estrangeira | Não pode estar vazio |
-| Status |    Texto   | Não pode estar vazio, Aberta (default), Atrasada ou Paga |
+| Value | Decimal| Não pode estar vazio, >0 |
+| Due date | Data | Não pode estar vazio |
+| Enrollment ID | Chave Estrangeira | Não pode estar vazio |
+| Status | Texto | Não pode estar vazio, Aberta (default), Atrasada ou Paga |
 
 ## :traffic_light: Rotas :traffic_light: <a name="rotas"></a>
 
 ### :pencil: Instituição de Ensino :pencil: <a name="subrota1"></a>
 - Vizualizar todas as instituições
-- GET localhost:3000/api/v1/instituicaos
+- GET localhost:3000/api/v1/institutions
 - Retorno
 ```
 {
     "status": "SUCCESS",
-    "message": "Instituições de ensino carregadas",
-    "data": [       
-        {
-            "id": 2,
-            "nome": "West Bayer University",
-            "cnpj": "50237080000252",
-            "tipo": "Universidade",
-            "created_at": "2020-12-03T22:44:49.399Z",
-            "updated_at": "2020-12-03T22:44:49.399Z"
-        },
-        {
-            "id": 1,
-            "nome": "Baumbach Academy",
-            "cnpj": "67110332000876",
-            "tipo": "Universidade",
-            "created_at": "2020-12-03T22:44:49.324Z",
-            "updated_at": "2020-12-03T22:44:49.324Z"
-        }
-    ]
+    "message": "Institutions loaded",
+    "data": [{
+        "id": 2,
+        "name": "Willms University",
+        "cnpj": "52163281000792",
+        "institution_type": "Escola",
+        "created_at": "2021-01-04T22:26:09.339Z",
+        "updated_at": "2021-01-04T22:26:09.339Z"
+    },
+    {
+        "id": 1,
+        "name": "Fatec salto",
+        "cnpj": "13239055000109",
+        "institution_type": "Creche",
+        "created_at": "2021-01-03T19:51:39.350Z",
+        "updated_at": "2021-01-04T19:30:45.754Z"
+    }]
 }
 ```
 - Vizualizar instituição por ID
-- GET localhost:3000/api/v1/instituicaos/2 
+- GET localhost:3000/api/v1/institutions/1
 - Parâmetro necessário: ID da instituição
 - Retorno
 ```
 {
     "status": "SUCCESS",
-    "message": "Instituição carregada",
+    "message": "Institution loaded",
     "data": {
-        "id": 2,
-        "nome": "West Bayer University",
-        "cnpj": "50237080000252",
-        "tipo": "Universidade",
-        "created_at": "2020-12-03T22:44:49.399Z",
-        "updated_at": "2020-12-03T22:44:49.399Z"
+        "id": 1,
+        "name": "Fatec salto",
+        "cnpj": "13239055000109",
+        "institution_type": "Creche",
+        "created_at": "2021-01-03T19:51:39.350Z",
+        "updated_at": "2021-01-04T19:30:45.754Z"
     }
 }
 ```
 - Adicionar instituição
-- POST localhost:3000/api/v1/instituicaos
-- Parâmetros necessários: nome, tipo, cnpj
+- POST localhost:3000/api/v1/institutions
+- Parâmetros necessários: name, institution_type, cnpj
 - Requisição
 ```
 {
-"nome" : "Anglo",
-"cnpj" : "54189711000922", 
-"tipo" : "Escola"
+"name": "Fatec",
+"cnpj": 13239155000109,
+"institution_type": "Escola" 
 }
 ```
 - Retorno
 ```
 {
     "status": "SUCCESS",
-    "message": "Saved instituicao",
+    "message": "Saved institution",
     "data": {
-        "id": 53,
-        "nome": "Anglo",
-        "cnpj": "54189711000922",
-        "tipo": "Escola",
-        "created_at": "2020-12-15T21:05:19.802Z",
-        "updated_at": "2020-12-15T21:05:19.802Z"
+        "id": 32,
+        "name": "Fatec",
+        "cnpj": "13239155000109",
+        "institution_type": "Escola",
+        "created_at": "2021-01-04T22:42:44.392Z",
+        "updated_at": "2021-01-04T22:42:44.392Z"
     }
 }
 ```
 - Excluir instituição por ID
-- DELETE localhost:3000/api/v1/instituicaos/52
+- DELETE localhost:3000/api/v1/institutions/32
 - Parâmetro necessário: ID da instituição
 - Retorno
 ```
 {
     "status": "SUCCESS",
-    "message": "Deleted instituicao",
+    "message": "Deleted institution",
     "data": {
-        "id": 52,
-        "nome": "Poliedro",
-        "cnpj": "54166711000922",
-        "tipo": "Creche",
-        "created_at": "2020-12-10T18:38:22.869Z",
-        "updated_at": "2020-12-17T22:37:28.298Z"
+        "id": 32,
+        "name": "Fatec",
+        "cnpj": "13239155000109",
+        "institution_type": "Escola",
+        "created_at": "2021-01-04T22:42:44.392Z",
+        "updated_at": "2021-01-04T22:42:44.392Z"
     }
 }
 ```
 - Atualizar instituição
-- PUT localhost:3000/api/v1/instituicaos/51
-- Parâmetros necessários: nome/tipo/cnpj, ID da instituição
+- PUT localhost:3000/api/v1/institutions/51
+- Parâmetros necessários: name/institution_type/cnpj, ID da instituição
 - Requisição
 ```
 {
-"tipo" : "Creche"
+"institution_type" : "Creche"
 }
 ```
 - Retorno
 ```
 {
     "status": "SUCCESS",
-    "message": "Updated instituicao",
+    "message": "Updated institution",
     "data": {
-        "id": 51,
-        "tipo": "Creche",
-        "nome": "Albert Einstein",
-        "cnpj": "54166711000911",
-        "created_at": "2020-12-04T19:20:55.540Z",
-        "updated_at": "2020-12-18T18:08:32.426Z"
+        "id": 1,
+        "institution_type": "Creche",
+        "name": "Fatec salto",
+        "cnpj": "13239055000109",
+        "created_at": "2021-01-03T19:51:39.350Z",
+        "updated_at": "2021-01-04T19:30:45.754Z"
     }
 }
 ```
 ### :runner: Aluno :runner: <a name="subrota2"></a>
-- Vizualizar todas os alunos
-- GET localhost:3000/api/v1/alunos 
+- Vizualizar todos os alunos
+- GET localhost:3000/api/v1/students 
 - Retorno
 ```
 {
     "status": "SUCCESS",
-    "message": "Alunos carregados",
-    "data": [       
-        {
-            "id": 2,
-            "nome": "Shara Senger",
-            "cpf": "59643103451",
-            "data_nascimento": "1996-03-28",
-            "telefone_celular": 626546561,
-            "genero": "M",
-            "meio_pagamento_fatura": "Boleto",
-            "created_at": "2020-12-03T22:44:49.394Z",
-            "updated_at": "2020-12-03T22:44:49.394Z"
-        },
-        {
-            "id": 1,
-            "nome": "Dr. Magaret Grady",
-            "cpf": "37538751446",
-            "data_nascimento": "1942-07-16",
-            "telefone_celular": 592688039,
-            "genero": "F",
-            "meio_pagamento_fatura": "Cartão",
-            "created_at": "2020-12-03T22:44:49.311Z",
-            "updated_at": "2020-12-03T22:44:49.311Z"
-        }
-    ]
-}
+    "message": "Students loaded",
+    "data": [{
+        "id": 2,
+        "name": "Rafael Franecki",
+        "cpf": "17195627900",
+        "birth": "1942-09-24",
+        "telephone": 214672115,
+        "gender": "M",
+        "payment_method": "Cartão",
+        "created_at": "2021-01-04T22:26:09.326Z",
+        "updated_at": "2021-01-04T22:26:09.326Z"
+    },
+    {
+        "id": 1,
+        "name": "Maria Oliveira",
+        "cpf": "19072839005",
+        "birth": "2000-05-07",
+        "telephone": 1234567,
+        "gender": "M",
+        "payment_method": "Boleto",
+        "created_at": "2021-01-03T19:51:34.811Z",
+        "updated_at": "2021-01-04T20:12:02.891Z"
+    }]
+} 
+
 ```
 - Vizualizar aluno por ID
-- GET localhost:3000/api/v1/alunos/2 
+- GET localhost:3000/api/v1/students/1 
 - Parâmetro necessário: ID do aluno
 - Retorno
 ```
 {
     "status": "SUCCESS",
-    "message": "Aluno carregado",
+    "message": "Student loaded",
     "data": {
         "id": 1,
-        "nome": "Dr. Magaret Grady",
-        "cpf": "37538751446",
-        "data_nascimento": "1942-07-16",
-        "telefone_celular": 592688039,
-        "genero": "F",
-        "meio_pagamento_fatura": "Cartão",
-        "created_at": "2020-12-03T22:44:49.311Z",
-        "updated_at": "2020-12-03T22:44:49.311Z"
+        "name": "Maria Oliveira",
+        "cpf": "19072839005",
+        "birth": "2000-05-07",
+        "telephone": 1234567,
+        "gender": "M",
+        "payment_method": "Boleto",
+        "created_at": "2021-01-03T19:51:34.811Z",
+        "updated_at": "2021-01-04T20:12:02.891Z"
     }
 }
 ```
 - Adicionar aluno
-- POST localhost:3000/api/v1/alunos
-- Parâmetros necessários: nome, cpf, data_nascimento, telefone_celular, meio_pagamento_fatura
+- POST localhost:3000/api/v1/students
+- Parâmetros necessários: name, cpf, birth, telephone, gender, payment_method
 - Requisição:
 ```
 {
-"nome": "Julia Amaral",
-"cpf":54413579,
-"data_nascimento": 20000507,
-"telefone_celular": 123456745,
-"genero": "F",
-"meio_pagamento_fatura": "Boleto"
+"name": "Luciana Oliveira",
+"cpf": 19072830005,
+"birth": 20000507,
+"telephone": 1234567,
+"gender": "F",
+"payment_method": "Boleto"
 }
 ```
 - Retorno
 ```
 {
     "status": "SUCCESS",
-    "message": "Saved aluno",
+    "message": "Saved student",
     "data": {
-        "id": 54,
-        "nome": "Julia Amaral",
-        "cpf": "654413579",
-        "data_nascimento": "2000-05-07",
-        "telefone_celular": 123456745,
-        "genero": "F",
-        "meio_pagamento_fatura": "Boleto",
-        "created_at": "2020-12-15T21:14:35.831Z",
-        "updated_at": "2020-12-15T21:14:35.831Z"
+        "id": 32,
+        "name": "Luciana Oliveira",
+        "cpf": "19072830005",
+        "birth": 20000507,
+        "telephone": 1234567,
+        "gender": "F",
+        "payment_method": "Boleto",
+        "created_at": "2021-01-05T00:46:24.478Z",
+        "updated_at": "2021-01-05T00:46:24.478Z"
     }
 }
 ```
 - Excluir aluno por ID
-- DELETE localhost:3000/api/v1/alunos/53
+- DELETE localhost:3000/api/v1/students/53
 - Parâmetro necessário: ID da aluno
 - Retorno
 ```
 {
     "status": "SUCCESS",
-    "message": "Deleted aluno",
+    "message": "Deleted student",
     "data": {
-        "id": 53,
-        "nome": "Jonas Amaral",
-        "cpf": "654313579",
-        "data_nascimento": "2000-05-07",
-        "telefone_celular": 123456745,
-        "genero": "F",
-        "meio_pagamento_fatura": "Boleto",
-        "created_at": "2020-12-10T18:37:20.772Z",
-        "updated_at": "2020-12-10T18:37:20.772Z"
+        "id": 32,
+        "name": "Luciana Oliveira",
+        "cpf": "19072830005",
+        "birth": "2000-05-07",
+        "telephone": 1234567,
+        "gender": "F",
+        "payment_method": "Boleto",
+        "created_at": "2021-01-05T00:46:24.478Z",
+        "updated_at": "2021-01-05T00:46:24.478Z"
     }
 }
 ```
 - Atualizar aluno
-- PUT localhost:3000/api/v1/alunos
-- Parâmetros necessários: nome/cpf/data_nascimento/telefone_celular/meio_pagamento_fatura, ID do aluno
+- PUT localhost:3000/api/v1/students
+- Parâmetros necessários: name/cpf/birth/telephone/gender/payment_method, ID do aluno
 - Requisição
 ```
 {
-"genero" :"F"
+"gender" :"F"
 }
 ```
 - Retorno
 ```
 {
     "status": "SUCCESS",
-    "message": "Updated aluno",
+    "message": "Updated student",
     "data": {
-        "id": 52,
-        "genero": "F",
-        "nome": "Aline",
-        "cpf": "1234567786",
-        "meio_pagamento_fatura": "Boleto",
-        "data_nascimento": null,
-        "telefone_celular": 123456786,
-        "created_at": "2020-12-09T18:13:02.831Z",
-        "updated_at": "2020-12-17T22:45:18.385Z"
+        "id": 1,
+        "gender": "F",
+        "name": "Maria Oliveira",
+        "cpf": "19072839005",
+        "payment_method": "Boleto",
+        "birth": "2000-05-07",
+        "telephone": 1234567,
+        "created_at": "2021-01-03T19:51:34.811Z",
+        "updated_at": "2021-01-05T00:50:29.123Z"
     }
 }
 ```
 ### :notebook: Matrícula :notebook: <a name="subrota3"></a>
 - Vizualizar todas as matrículas
-- GET localhost:3000/api/v1/matriculas
+- GET localhost:3000/api/v1/enrollments
 - Retorno
 ```
 {
     "status": "SUCCESS",
-    "message": "Matriculas carregadas",
-    "data": [       
-                {
-            "id": 2,
-            "valor_total_reais": "4233.02268631478",
-            "quantidade_faturas": 18,
-            "dia_vencimento_faturas": 30,
-            "nome_curso": "Engineering 428",
-            "aluno_id": 2,
-            "instituicao_id": 2,
-            "created_at": "2020-12-03T22:44:49.403Z",
-            "updated_at": "2020-12-03T22:44:49.403Z"
-        },
-        {
-            "id": 1,
-            "valor_total_reais": "4718.57606906062",
-            "quantidade_faturas": 12,
-            "dia_vencimento_faturas": 20,
-            "nome_curso": "Creative Arts 280",
-            "aluno_id": 1,
-            "instituicao_id": 1,
-            "created_at": "2020-12-03T22:44:49.341Z",
-            "updated_at": "2020-12-03T22:44:49.341Z"
-        }
-    ]
+    "message": "Enrollments loaded",
+    "data":[{
+        "id": 2,
+        "full_value": "12345.0",
+        "installments": 2,
+        "due_day": 3,
+        "course": "Communications",
+        "student_id": 1,
+        "institution_id": 1,
+        "created_at": "2021-01-03T19:52:06.555Z",
+        "updated_at": "2021-01-03T19:52:06.555Z"
+    },
+    {
+        "id": 1,
+        "full_value": "12345.0",
+        "installments": 2,
+        "due_day": 3,
+        "course": "Communications",
+        "student_id": 1,
+        "institution_id": 1,
+        "created_at": "2021-01-03T19:51:52.558Z",
+        "updated_at": "2021-01-03T19:51:52.558Z"
+    }]
 }
 ```
 - Vizualizar matrícula por ID
-- GET localhost:3000/api/v1/matriculas/2
+- GET localhost:3000/api/v1/enrollments/2
 - Parâmetro necessário: ID da matrícula
 - Retorno
 ```
 {
     "status": "SUCCESS",
-    "message": "Matricula carregada",
+    "message": "Enrollment loaded",
     "data": {
         "id": 2,
-        "valor_total_reais": "4233.02268631478",
-        "quantidade_faturas": 18,
-        "dia_vencimento_faturas": 30,
-        "nome_curso": "Engineering 428",
-        "aluno_id": 2,
-        "instituicao_id": 2,
-        "created_at": "2020-12-03T22:44:49.403Z",
-        "updated_at": "2020-12-03T22:44:49.403Z"
+        "full_value": "12345.0",
+        "installments": 2,
+        "due_day": 3,
+        "course": "Communications",
+        "student_id": 1,
+        "institution_id": 1,
+        "created_at": "2021-01-03T19:52:06.555Z",
+        "updated_at": "2021-01-03T19:52:06.555Z"
     }
 }
 ```
 - Adicionar matrícula e criar faturas
-- POST localhost:3000/api/v1/matriculas
-- Parâmetros necessários: valor_total_reais, quantidade_faturas, dia_vencimento_faturas, nome_curso, aluno_id, instituicao_id
+- POST localhost:3000/api/v1/enrollments
+- Parâmetros necessários: full_value, installments, due_day, course, student_id, institution_id
 - Requisição
 ```
 {
-"valor_total_reais" : 1555,
-"quantidade_faturas" : 5, 
-"dia_vencimento_faturas": 31,
-"nome_curso" : "letras",
-"aluno_id": 52,
-"instituicao_id": 32
+	"full_value": 10,
+    "installments": 2,
+    "due_day": 3,
+    "course": "Communications",
+    "student_id": 1,
+    "institution_id": 1
 }
 ```
 - Retorno
 ```
 {
     "status": "SUCCESS",
-    "message": "Saved matricula",
+    "message": "Saved enrollment",
     "data": {
-        "id": 186,
-        "valor_total_reais": "1555.0",
-        "quantidade_faturas": 5,
-        "dia_vencimento_faturas": 31,
-        "nome_curso": "letras",
-        "aluno_id": 52,
-        "instituicao_id": 32,
-        "created_at": "2020-12-15T20:53:58.589Z",
-        "updated_at": "2020-12-15T20:53:58.589Z"
+        "id": 45,
+        "full_value": "10.0",
+        "installments": 2,
+        "due_day": 3,
+        "course": "Communications",
+        "student_id": 1,
+        "institution_id": 1,
+        "created_at": "2021-01-05T00:57:01.597Z",
+        "updated_at": "2021-01-05T00:57:01.597Z"
     }
 }
 ```
 - Excluir matrícula e faturas por ID
-- DELETE localhost:3000/api/v1/matriculas/197
+- DELETE localhost:3000/api/v1/enrollments/197
 - Parâmetro necessário: ID da matrícula
 - Retorno
 ```
 {
     "status": "SUCCESS",
-    "message": "Deleted matricula",
+    "message": "Deleted enrollments",
     "data": {
         "id": 197,
-        "valor_total_reais": "1555.0",
-        "quantidade_faturas": 5,
-        "dia_vencimento_faturas": 31,
-        "nome_curso": "letras",
-        "aluno_id": 52,
-        "instituicao_id": 31,
-        "created_at": "2020-12-16T17:04:13.304Z",
-        "updated_at": "2020-12-17T22:23:19.628Z"
+        "full_value": "1555.0",
+        "installments": 5,
+        "due_day": 31,
+        "course": "letras",
+        "student_id": 52,
+        "institution_id": 31,
+        "created_at": "2021-01-05T00:57:01.597Z",
+        "updated_at": "2021-01-05T00:57:01.597Z"
     }
 }
 ```
 - Atualizar matrícula 
-- PUT localhost:3000/api/v1/matriculas/196
-- Parâmetros necessários: valor_total_reais/quantidade_faturas/dia_vencimento_faturas/nome_curso/ aluno_id/instituicao_id, ID da matrícula
+- PUT localhost:3000/api/v1/enrollments/2
+- Parâmetros necessários: full_value/installments/due_day/course/student_id/institution_id, ID da matrícula
 - Requisição
 ```
 {
-"instituicao_id": 31
+"institution_id": 1
 }
 ```
 - Retorno
 ```
 {
     "status": "SUCCESS",
-    "message": "Updated matricula",
+    "message": "Updated enrollment",
     "data": {
-        "id": 196,
-        "instituicao_id": 31,
-        "valor_total_reais": "1555.0",
-        "quantidade_faturas": 5,
-        "dia_vencimento_faturas": 31,
-        "nome_curso": "letras",
-        "aluno_id": 52,
-        "created_at": "2020-12-16T17:04:03.134Z",
-        "updated_at": "2020-12-18T18:30:35.369Z"
+        "id": 2,
+        "institution_id": 1,
+        "full_value": "12345.0",
+        "installments": 2,
+        "due_day": 3,
+        "course": "Communications",
+        "student_id": 1,
+        "created_at": "2021-01-03T19:52:06.555Z",
+        "updated_at": "2021-01-03T19:52:06.555Z"
     }
 }
 ```
 ### :money_with_wings: Fatura :money_with_wings: <a name="subrota4"></a>
 - Vizualizar todas as faturas
-- GET localhost:3000/api/v1/faturas
+- GET localhost:3000/api/v1/bills
 - Retorno
 ```
-        {
-            "id": 2,
-            "valor_fatura_reais": "393.214672421719",
-            "data_vencimento": "2017-03-02",
-            "status": "Paga",
-            "matricula_id": 1,
-            "created_at": "2020-12-03T22:44:49.358Z",
-            "updated_at": "2020-12-03T22:44:49.358Z"
-        },
-        {
-            "id": 1,
-            "valor_fatura_reais": "393.214672421719",
-            "data_vencimento": "2019-04-12",
-            "status": "Aberta",
-            "matricula_id": 1,
-            "created_at": "2020-12-03T22:44:49.354Z",
-            "updated_at": "2020-12-03T22:44:49.354Z"
-        }
-    ]
+{
+    "status": "SUCCESS",
+    "message": "Bills loaded",
+    "data": [{
+        "id": 2,
+        "value": "5.0",
+        "due_date": "2021-02-03",
+        "status": "Aberta",
+        "enrollment_id": 13,
+        "created_at": "2021-01-04T19:18:14.696Z",
+        "updated_at": "2021-01-04T19:18:14.696Z"
+    },
+    {
+        "id": 1,
+        "value": "5.0",
+        "due_date": "2020-02-08",
+        "status": "Atrasada",
+        "enrollment_id": 5,
+        "created_at": "2021-01-04T16:51:33.019Z",
+        "updated_at": "2021-01-04T17:05:29.481Z"
+    }]
 }
 ```
 - Vizualizar fatura por ID
-- GET localhost:3000/api/v1/faturas/1
+- GET localhost:3000/api/v1/bills/1
 - Parâmetro necessário: ID da fatura
 - Retorno
 ```
 {
     "status": "SUCCESS",
-    "message": "Fatura carregada",
+    "message": "Bill loaded",
     "data": {
         "id": 1,
-        "valor_fatura_reais": "393.214672421719",
-        "data_vencimento": "2019-04-12",
-        "status": "Aberta",
-        "matricula_id": 1,
-        "created_at": "2020-12-03T22:44:49.354Z",
-        "updated_at": "2020-12-03T22:44:49.354Z"
+        "value": "5.0",
+        "due_date": "2020-02-08",
+        "status": "Atrasada",
+        "enrollment_id": 5,
+        "created_at": "2021-01-04T16:51:33.019Z",
+        "updated_at": "2021-01-04T17:05:29.481Z"
     }
 }
 ```
 - Adicionar fatura
-- POST localhost:3000/api/v1/faturas
-- Parâmetros necessários: valor_fatura_reais, data_vencimento, matricula_id, status
+- POST localhost:3000/api/v1/bills
+- Parâmetros necessários: value, due_date, enrollment_id, status
 - Requisição
 ```
 {
-"valor_fatura_reais": 600,
-"data_vencimento": 20200303,
-"matricula_id": 51,
+"value": 5.0,
+"due_date": 20200208,
+"enrollment_id": 5,
 "status": "Aberta"
 }
 ```
@@ -523,59 +522,59 @@
 ```
 {
     "status": "SUCCESS",
-    "message": "Saved fatura",
+    "message": "Saved bill",
     "data": {
-        "id": 828,
-        "valor_fatura_reais": "600.0",
-        "data_vencimento": 20200303,
+        "id": 422,
+        "value": "5.0",
+        "due_date": 20200208,
         "status": "Aberta",
-        "matricula_id": 51,
-        "created_at": "2020-12-15T21:48:38.261Z",
-        "updated_at": "2020-12-15T21:48:38.261Z"
+        "enrollment_id": 5,
+        "created_at": "2021-01-05T01:17:42.376Z",
+        "updated_at": "2021-01-05T01:17:42.376Z"
     }
 }
 ```
 - Excluir fatura por ID
-- DELETE localhost:3000/api/v1/faturas/835
+- DELETE localhost:3000/api/v1/bills/70
 - Parâmetro necessário: ID da fatura
 - Retorno
 ```
 {
     "status": "SUCCESS",
-    "message": "Deleted fatura",
+    "message": "Deleted bill",
     "data": {
-        "id": 835,
-        "valor_fatura_reais": "311.0",
-        "data_vencimento": "2021-01-31",
+        "id": 70,
+        "value": "69.8333752907063",
+        "due_date": "2015-07-26",
         "status": "Aberta",
-        "matricula_id": 194,
-        "created_at": "2020-12-16T15:22:19.714Z",
-        "updated_at": "2020-12-16T15:22:19.714Z"
+        "enrollment_id": 21,
+        "created_at": "2021-01-04T22:26:09.737Z",
+        "updated_at": "2021-01-04T22:26:09.737Z"
     }
 }
 ```
 - Atualizar fatura
-- PUT localhost:3000/api/v1/faturas/834
-- Parâmetros necessários: valor_fatura_reais/data_vencimento/matricula_id/status, ID da fatura
+- PUT localhost:3000/api/v1/bills/834
+- Parâmetros necessários: value/due_date/enrollment_id/status, ID da fatura
 - Requisição
 ```
 {
-"valor_fatura_reais": 300
+"status": "Atrasada"
 }
 ```
 - Retorno
 ```
 {
     "status": "SUCCESS",
-    "message": "Updated fatura",
+    "message": "Updated bill",
     "data": {
-        "id": 834,
-        "valor_fatura_reais": "300.0",
-        "data_vencimento": "2020-12-31",
-        "status": "Aberta",
-        "matricula_id": 194,
-        "created_at": "2020-12-16T15:22:19.711Z",
-        "updated_at": "2020-12-18T18:33:01.620Z"
+        "id": 1,
+        "status": "Atrasada",
+        "value": "5.0",
+        "due_date": "2020-02-08",
+        "enrollment_id": 5,
+        "created_at": "2021-01-04T16:51:33.019Z",
+        "updated_at": "2021-01-04T17:05:29.481Z"
     }
 }
 ```

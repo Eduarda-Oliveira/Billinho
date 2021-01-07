@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class FaturaTest < ActiveSupport::TestCase
+class EnrollmentTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
