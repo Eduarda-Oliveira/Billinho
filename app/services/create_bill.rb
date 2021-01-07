@@ -7,7 +7,6 @@ class CreateBill
     @enrollment = Enrollment.find(params[:enrollment_id])
     @value = params[:amount_cents]
     @installments = params[:installments]
-    @full_value = params[:full_value]
     @due_date = params[:due_date]
   end
 
@@ -19,6 +18,7 @@ class CreateBill
   def currency
     'BRL'
   end
+  
   private
 
   def status_default
